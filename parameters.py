@@ -15,3 +15,13 @@ def initialize_parameters(dimensions):
         parameters["b" + str(i)] = np.zeros((dimensions[i], 1))
 
     return parameters
+
+# Function that will update parameters after the backpropagation
+def update_parameters(current_parameters, gradients, learning_rate):
+    number_of_layers = len(current_parameters) // 2
+    parameters = {}
+    for i in range(number_of_layers):
+        parameters["W" + str(l+1)] = current_parameters["W" + str(i+1)] - learning_rate*gradients['dW'+str(i+1)]
+        parameters["b" + str(l+1)] = current_parameters["b" + str(i+1)] - learning_rate*gradients['db'+str(i+1)]
+    
+    return parameters
