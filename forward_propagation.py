@@ -10,7 +10,6 @@ def linear_transformation(layer_input, W, b):
     Z = np.dot(W,layer_input) + b
     # This will be useful for the backpropagation part
     cache = (layer_input, W, b, Z)
-
     return Z, cache
 
 # Defining the function which will calculate the activation array of a given layer
@@ -24,7 +23,10 @@ def activation(layer_input, W, b, activation_function):
     elif activation_function == "sigmoid":
         Z, cache = linear_transformation(layer_input, W, b)
         A = sigmoid.sigmoid(Z)
-
+    # print("Z")
+    # print(Z)
+    # print("A")
+    # print(A)
     return A, cache
 
 # Lets construct the forward part of the model
@@ -34,7 +36,6 @@ def model_forward(X, parameters):
 
     # Parameters have W and b, therefore, to obtain the total number of layers
     number_of_layers = len(parameters) // 2
-
     # Let's call the input X is the activation of the layer 0
     A = X
     '''
@@ -44,6 +45,7 @@ def model_forward(X, parameters):
     for i in range(1, number_of_layers):
         last_layer_output = A
         A, cache = activation(last_layer_output, parameters['W' + str(i)], parameters['b' + str(i)], "relu")
+        print(A)
         set_of_caches.append(cache)
     
     # For the last layer, we use sigmoid

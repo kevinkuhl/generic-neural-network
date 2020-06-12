@@ -11,5 +11,4 @@ def cross_entropy_cost(network_output, Y):
 
     cost = -(1/number_of_training_ex)*np.sum(Y*np.log(network_output) + (1-Y)*np.log(1-network_output), axis=1, keepdims=True)
     cost = np.squeeze(cost)
-
     return cost

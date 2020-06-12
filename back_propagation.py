@@ -59,12 +59,12 @@ def model_backward(AL, Y, set_of_caches):
     dAL = - (np.divide(Y, AL) - np.divide(1 - Y, 1 - AL))
 
     current_cache = set_of_caches[-1]
-    grads["dA" + str(L-1)], grads["dW" + str(L)], grads["db" + str(L)] = linear_back_prop(dAL, current_cache, 'sigmoid')
+    grads["dA" + str(number_of_layers-1)], grads["dW" + str(number_of_layers)], grads["db" + str(number_of_layers)] = activation_back_prop(dAL, current_cache, 'sigmoid')
 
     # Now for the rest of the layers (activated by ReLu functions)
     for l in reversed(range(number_of_layers-1)):
         current_cache = set_of_caches[l]
-        dA_prev_temp, dW_temp, db_temp = linear_back_prop(grads["dA"+str(l+1)], current_cache, 'relu')
+        dA_prev_temp, dW_temp, db_temp = activation_back_prop(grads["dA"+str(l+1)], current_cache, 'relu')
         grads["dA" + str(l)] = dA_prev_temp
         grads["dW" + str(l + 1)] = dW_temp
         grads["db" + str(l + 1)] = db_temp
